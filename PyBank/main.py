@@ -33,7 +33,7 @@ with open(csvpath, newline="") as csvfile:
 		total = total + monthly_bal
 		monthly_change.append(difference)
 
-	average = (sum(monthly_change)-monthly_change[1])/ (len(monthly_change)-1)
+	average = (sum(monthly_change) - monthly_change[0]) / (len(monthly_change)-1)
 
 
 
