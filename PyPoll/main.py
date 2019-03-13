@@ -1,10 +1,10 @@
-
+#import os and csv and path to the resources
 
 import os
 import csv 
 
 csvpath = os.path.join("Resources", "election_data.csv")
-
+#add a list and zero variables
 total_votes = []
 past_id = 0
 winning_vote = 0
@@ -12,7 +12,8 @@ winning_vote = 0
 with open(csvpath, newline="") as csvfile:
 	csvreader = csv.reader(csvfile, delimiter=",")
 	csv_header = next(csvreader)
-
+#create a loop that will append all votes to a list while 
+#making sure a voter doesn't vote twice
 	for votes in csvreader:
 		voter_id = votes[0]
 		candidate = votes[2]
@@ -24,16 +25,17 @@ with open(csvpath, newline="") as csvfile:
 	lcount = total_votes.count("Li")
 	ocount = total_votes.count("O'Tooley")
 	total = len(total_votes)
-
+#create a dictionary to make sure counted votes are for a certain candidate
+#use a for loop to run through the tallied votes to find the winner
 	final = {"Khan": kcount, "Correy": ccount, "Li": lcount, "O'Tooley": ocount}
 	for candidate, vote_calc in final.items():
 		if vote_calc > winning_vote:
 			winning_vote = vote_calc
 			winner = candidate
-
+#create a simple function to find the percent
 def percent (votes, total):
 	return (votes/total)*100
-
+#output the complete election results
 print("Election Results")
 print("----------------------------")
 print(f'Total Votes: {total}')
@@ -45,7 +47,7 @@ print(f"O'Tooley: {round(percent(ocount, total), 3)}%  ({ocount})")
 print("----------------------------")
 print(f'Winner: {winner}')
 print("----------------------------")
-
+#create an output path to print out a csv file
 output_path = os.path.join("Election Results.csv")
 
 with open(output_path, "w", newline="") as csvfile:
